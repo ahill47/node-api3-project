@@ -1,9 +1,21 @@
 const express = require('express');
+// you also will need the post info
+const post = require ('../posts/postDbgit ')
+const db= require('./userDb')
 
 const router = express.Router();
-
+router.use(express.json())
 router.post('/', (req, res) => {
-  // do your magic!
+  db.get()
+    .then(user=>{
+      console.log(user)
+      res.status(200).json({
+        message: 'It worked'
+      })
+      .catch(error=>{
+        console.log("You have an error")
+      })
+    })
 });
 
 router.post('/:id/posts', (req, res) => {

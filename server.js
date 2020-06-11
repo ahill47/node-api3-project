@@ -8,8 +8,8 @@ const port=4000
 
 server.use(logger)
 server.use(express.json())
-
-
+server.use('/users', userRouter)
+server.use('/posts', postRouter)
 
 
 server.get('/', (req, res) => {

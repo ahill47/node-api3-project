@@ -1,10 +1,11 @@
 const express = require('express');
 // you also will need the post info
-const post = require ('../posts/postDbgit ')
+const post = require ('../posts/postDb')
 const db= require('./userDb')
 
 const router = express.Router();
 router.use(express.json())
+
 router.post('/', (req, res) => {
   db.get()
     .then(user=>{

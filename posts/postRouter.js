@@ -23,6 +23,7 @@ router.get('/:id', mids.validatePostId, (req, res) => {
   .then(posts=>{
     
     res.status(200).json({message:"It worked"})
+    
   
   })
   .catch(error=>{
@@ -35,7 +36,7 @@ router.delete('/:id',mids.validatePostId,  (req, res) => {
   // do your magic!
   db.remove(req.params.id)
   .then(removed=>{ 
-    res.status(200).json({message:"User has been deleted"})
+    res.status(200).json({message:"Post has been deleted"})
     
   })
   .catch(error=>{
@@ -61,16 +62,20 @@ router.put('/:id', validatePostId, mids.validatePost ,(req, res) => {
 function validatePostId(req, res, next){
   const {id}=req.params
   db.getById(id)
-      .then(posts=>{
+      .then(post=>{
           if (!post){
               res.status(404).json({
                   message:"invalid post id"
               })
           } else{
               req.post=post;
-              next()
+             res.status(404).json({
+                 message:"Post not found"
+             })
           }
       })
+  .catch(next)
 }
+
 
 module.exports = router;

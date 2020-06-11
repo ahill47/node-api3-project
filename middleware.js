@@ -27,9 +27,12 @@ function validatePostId(req, res, next){
                 })
             } else{
                 req.post=post;
-                next()
+               res.status(404).json({
+                   message:"Post not found"
+               })
             }
         })
+    .catch(next)
 }
 
 function validateUser(req, res, next){

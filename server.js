@@ -1,10 +1,10 @@
 const express = require('express');
 
-const userRouter=require('./posts/postRouter')
-const postRouter = require('./users/userRouter')
+const userRouter = require('./users/userRouter');
+const postRouter = require('./posts/postRouter')
 
 const server = express();
-const port=4000
+const port=3000
 
 server.use(logger)
 server.use(express.json())

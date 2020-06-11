@@ -15,31 +15,33 @@ router.get('/', (req, res, next) => {
   
   })
 
-});
+});//works
 
 router.get('/:id', mids.validatePostId, (req, res) => {
 
   db.getById(req.params.id)
   .then(posts=>{
     
-    res.status(200).json(posts)
+    res.status(200).json({message:"It worked"})
+  
   })
   .catch(error=>{
     console.log(error)
   })
-  // do your magic!
+  // works
 });
 
-router.delete('/:id', mids.validatePostId, (req, res) => {
+router.delete('/:id',mids.validatePostId,  (req, res) => {
   // do your magic!
   db.remove(req.params.id)
-  .then(removed=>{
-    res.status(200).json(removed)
+  .then(removed=>{ 
+    res.status(200).json({message:"User has been deleted"})
+    
   })
   .catch(error=>{
     console.log(error)
   })
-});
+});// works
 
 router.put('/:id', validatePostId, mids.validatePost ,(req, res) => {
   // do your magic!
@@ -47,12 +49,12 @@ router.put('/:id', validatePostId, mids.validatePost ,(req, res) => {
   const newText= {text};
   db.update(req.params.id, newText)
   .then(edit =>{
-    res.status(200).json(edit)
+    res.status(200).json({message:"hey I also work"})
   })
   .catch(error =>{
     console.log(error)
   })
-});
+}); // i dont work needs help
 
 // custom middleware
 

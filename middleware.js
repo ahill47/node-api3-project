@@ -20,7 +20,7 @@ function validateUserId(){
 function validatePostId(req, res, next){
     const {id}=req.params
     db.getById(id)
-        .then(posts=>{
+        .then(post=>{
             if (!post){
                 res.status(404).json({
                     message:"invalid post id"

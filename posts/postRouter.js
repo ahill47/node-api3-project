@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
   db.get()
     .then(posts=>{
       console.log(posts);
-      res.status(200).json({message: 'It worked'})
+      res.status(200).json(posts)
     })
   .catch(error=>{
     console.log('You have an error');
@@ -17,19 +17,20 @@ router.get('/', (req, res, next) => {
 
 });//works
 
-router.get('/:id', mids.validatePostId, (req, res) => {
+router.get('/:id', (req, res) => {
 
   db.getById(req.params.id)
   .then(posts=>{
-    
-    res.status(200).json({message:"It worked"})
+  
+    res.status(200).json(posts)
+    console.log(posts)
     
   
   })
   .catch(error=>{
     console.log(error)
   })
-  // works
+  
 });
 
 router.delete('/:id',mids.validatePostId,  (req, res) => {
@@ -63,19 +64,17 @@ function validatePostId(req, res, next){
   const {id}=req.params
   db.getById(id)
       .then(post=>{
+        console.log(post)
           if (!post){
               res.status(404).json({
                   message:"invalid post id"
               })
           } else{
               req.post=post;
-             res.status(404).json({
-                 message:"Post not found"
-             })
+             
           }
       })
-  .catch(next)
+      .catch(next)
 }
-
 
 module.exports = router;

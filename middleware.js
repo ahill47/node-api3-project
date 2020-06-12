@@ -1,4 +1,6 @@
 const db= require('./users/userDb')
+const dbPost=require('./posts/postDb')
+
 
 function validateUserId(){
     return (req, res, next)=>{
@@ -18,21 +20,30 @@ function validateUserId(){
 }
 
 function validatePostId(req, res, next){
-    const {id}=req.params
-    db.getById(id)
+    // const {id}=req.params
+    // console.log(id)
+    dbPost.getById(req.params.id)
         .then(post=>{
-            if (!post){
-                res.status(404).json({
-                    message:"invalid post id"
-                })
+            console.log(req.params.id)
+            if (post){
+                 req.post=post;
+                   next() 
+                   console.log('req.post promise', req.post)
             } else{
-                req.post=post;
+               
                res.status(404).json({
                    message:"Post not found"
+                   
                })
+            
             }
         })
-    .catch(next)
+    .catch(error=>{
+        res.status(500).json({
+            message:"You have a error"
+        })
+        console.log('req.post', req.post)
+    })
 }
 
 function validateUser(req, res, next){

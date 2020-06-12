@@ -43,6 +43,7 @@ router.get("/", (req, res) => {
     })
     .catch(error => {
       console.log(error);
+      
     });
 }); //working
 
@@ -71,11 +72,13 @@ router.get("/:id/posts", validateUserId, (req, res) => {
 router.delete("/:id", validateUserId, (req, res) => {
   db.remove(req.params.id)
     .then(removed => {
+      res.json(req.user) // gets user that was deleted 
       res.status(200).json({message:"User delete is working"});
 
     })
     .catch(error => {
       console.log(error);
+      res.status(500).json({message: "Error removing user"})
     });
 }); //working
 

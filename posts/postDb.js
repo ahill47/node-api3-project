@@ -8,11 +8,13 @@ module.exports = {
   remove,
 };
 
+
 function get() {
   return db('posts');
 }
 
 function getById(id) {
+  console.log(`this id ${id}`)
   return db('posts')
     .where({ id })
     .first();
